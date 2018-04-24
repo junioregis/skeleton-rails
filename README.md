@@ -1,6 +1,6 @@
 # Introduction
 
-This tutorial explains how to start dockerized Ruby on Rails
+This tutorial explains how to start dockerized Ruby on Rails 5.2
 
 # Requirements
 
@@ -12,9 +12,8 @@ Docker-Compose  | 1.20.1
 # Docker Images
 
 Name            | Version
-----------------|-----------
+----------------|--------
 Ruby            | 2.5.1
-Rails           | 5.2.0
 Postgres        | 10.3
 PgAdmin         | latest
 Nginx           | 1.13
