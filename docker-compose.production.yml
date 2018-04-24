@@ -1,0 +1,8 @@
+version: '3.6'
+
+services:
+  app:
+    command: bundle exec puma -C 'config/puma.rb'
+    environment:
+      - RAILS_ENV=production
+      - RACK_ENV=production
