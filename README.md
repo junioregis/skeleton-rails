@@ -8,6 +8,11 @@ Name            | Version
 ----------------|-----------
 Docker          | 18.03.0-ce
 Docker-Compose  | 1.20.1
+
+# Docker Images
+
+Name            | Version
+----------------|-----------
 Ruby            | 2.5.1
 Rails           | 5.2.0
 Postgres        | 10.3
