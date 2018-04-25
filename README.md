@@ -51,7 +51,7 @@ docker-compose down
 
 # 5. Config Database
 
-Set this credentials on ```config/database.yml```:
+Set this attributes for each database environment configuration on ```config/database.yml```:
 
 ```
 host: db
@@ -71,14 +71,19 @@ docker-compose -f docker-compose.yml -f docker-compose.[environment].yml up -d
 docker-compose -f docker-compose.yml -f docker-compose.[environment].yml run app rake db:create
 ```
 
-# 8. Access App (development)
+# 8. App Access - development
 
 [http://localhost:3000](http://localhost:3000)
 
-# 9. Access PgAdmin (development)
+# 9. PgAdmin Access - development
 
+```
 [http://localhost:8000](http://localhost:8000)
 
-# 10. Access App (production)
+username: admin
+password: admin
+```
+
+# 10. App Access - production
 
 [http://localhost](http://localhost)
