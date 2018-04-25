@@ -77,9 +77,9 @@ docker-compose -f docker-compose.yml -f docker-compose.[environment].yml run app
 
 # 9. PgAdmin Access - development
 
-```
 [http://localhost:8000](http://localhost:8000)
 
+```
 username: admin
 password: admin
 ```
