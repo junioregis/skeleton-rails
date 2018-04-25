@@ -11,12 +11,12 @@ Docker-Compose  | 1.20.1
 
 # Docker Images
 
-Name            | Version
-----------------|--------
-Ruby            | 2.5.1
-Postgres        | 10.3
-PgAdmin         | latest
-Nginx           | 1.13
+Name           | Tag
+---------------|--------
+ruby           | 2.5.1
+postgres       | 10.3
+dpage/pgadmin4 | latest
+nginx          | 1.13
 
 # 1. Create Volumes
 
@@ -33,7 +33,7 @@ docker-compose up -d
 docker-compose run app rails new . --force --skip-bundle --database=postgresql
 docker-compose down
 
-# Buld again with new Gemfile
+# Build again with new Gemfile
 docker-compose build
 ```
 
