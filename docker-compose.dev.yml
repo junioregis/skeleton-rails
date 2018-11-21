@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  app:
+    restart: "no"
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "3000:3000"
+
+  db_admin:
+    restart: "no"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8000:80"
+
+  portainer:
+    restart: "no"
+    ports:
+      - "9000:9000"

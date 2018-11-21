@@ -1,15 +1,18 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.3-alpine
 
 ARG APP_PATH='/app'
 ARG TIMEZONE=America/Sao_Paulo
 
-RUN apt-get update -qq && apt-get install -y \
-    build-essential \
-    libpq-dev       \
-    imagemagick     \
-    locales         \
-    nodejs          \
-    nano
+RUN apk add --update \
+    build-base \
+    imagemagick \
+    linux-headers \
+    nano \
+    nodejs \
+    postgresql-dev \
+    tzdata
+
+RUN rm -rf /var/cache/apk/*
 
 RUN mkdir $APP_PATH
 

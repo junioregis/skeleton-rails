@@ -1,0 +1,12 @@
+pt_BR:
+  response:
+    error:
+      internal_error: Ocorreu um erro interno
+      routing_error: Endpoint não encontrado
+    auth:
+      bad_credentials: Credenciais inválidas
+      unauthorized: Não autorizado
+      error: Erro na autenticação
+      success: Autenticação bem sucedida
+    server:
+      pong: Pong

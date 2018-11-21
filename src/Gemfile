@@ -1,5 +1,43 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.5.3'
 
-gem 'rails', '~> 5.2.0'
+# rails
+gem 'rails', '~> 5.2.1'
+
+# database
+gem 'pg', '>= 0.18', '< 2.0'
+
+# server
+gem 'puma', '~> 3.11'
+
+# image
+gem 'mini_magick', '~> 4.8'
+
+# boot faster
+gem 'bootsnap', '>= 1.1.0', require: false
+
+group :development do
+  # deploy
+  gem 'capistrano-rails'
+
+  # listen for file modifications
+  gem 'listen', '>= 3.0.5', '< 3.2'
+
+  # preloads app faster
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :development, :test do
+  # fake data
+  gem 'faker'
+end
+
+# racks
+gem 'rack-cors'
+gem 'rack-attack'
+
+# utils
+gem 'jwt'
+gem 'httparty'

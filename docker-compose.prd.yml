@@ -1,0 +1,41 @@
+version: '3.6'
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy:alpine
+    networks:
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /home/ubuntu/certs:/etc/nginx/certs
+
+  server:
+    restart: always
+    env_file:
+      - ./env/production.env
+    environment:
+      VIRTUAL_HOST: api.domain.com
+      VIRTUAL_PORT: 80
+
+  app:
+    restart: always
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    env_file:
+      - ./env/production.env
+
+  db_admin:
+    restart: always
+    env_file:
+      - ./env/production.env
+    environment:
+      VIRTUAL_HOST: db.domain.com
+      VIRTUAL_PORT: 80
+
+  portainer:
+    restart: always
+    environment:
+      VIRTUAL_HOST: portainer.domain.com
+      VIRTUAL_PORT: 9000
