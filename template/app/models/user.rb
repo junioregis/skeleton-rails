@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  enum :provider, [ :facebook, :google ]
+
   has_one :preference, autosave: true, dependent: :destroy
   has_one :profile,    autosave: true, dependent: :destroy
 

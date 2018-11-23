@@ -24,13 +24,14 @@ module V1
       user.provider    = auth_params[:provider]
       user.provider_id = info[:id]
 
-      user.preference.locale = 'pt_BR'
-      user.preference.unit   = 'km'
+      user.preference.locale = :pt_BR
+      user.preference.unit   = :km
       
-      user.profile.name     = info[:name]
-      user.profile.gender   = info[:gender]
-      user.profile.birthday = info[:birthday]
-      user.profile.avatar.attach(io: open(info[:photo_url]), filename: 'avatar')
+      user.profile.name   = info[:name]
+      user.profile.gender = info[:gender]
+      user.profile.avatar.attach(io: open(info[:avatar]), filename: 'avatar')
+
+      type = user.new_record? ? 'signUp' : 'signIn'
 
       if user.save!
         begin
@@ -40,7 +41,8 @@ module V1
 
           headers = { 
             'Auth-Token' => token,
-            'Expiration' => Jwt.expiration
+            'Expiration' => Jwt.expiration,
+            'Type'       => type
           }
           
           r headers: headers, message: 'auth.success'

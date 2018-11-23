@@ -21,14 +21,22 @@ class ApplicationController < ActionController::API
   protected
 
   def log(e)
-    # TODO: add slack implementation
+    title = e.message
 
-    project_files = Dir.glob("**/*").select { |f| File.file?(f) }
+    message = if e.is_a? Exception
+                project_files = Dir.glob("**/*").select { |f| File.file?(f) }
 
-    logger.debug e
+                e.backtrace.select { |line| project_files.any? { |p| line.include? p } }.each { |line| logger.debug line }
+              else
+                e
+              end.join("\n")
 
-    if e.is_a? Exception
-      e.backtrace.select {|line| project_files.any? {|p| line.include? p}}.each {|line| logger.debug line}
+    logger.debug "#{title}: #{message}"
+
+    Thread.new do
+      Slack::send(title, message)
+    rescue StandardError => e
+      logger.debug e
     end
   end
 
@@ -38,10 +46,10 @@ class ApplicationController < ActionController::API
 
   def render_response(options = {})
     default = {
-      message: '',
-      headers: {},
-      body: {},
-      status: 200
+        message: '',
+        headers: {},
+        body: {},
+        status: 200
     }
 
     options = default.merge options
@@ -50,8 +58,8 @@ class ApplicationController < ActionController::API
 
     body = { meta: { code:    options[:status],
                      message: options[:message] },
-            result: options[:body]}
-    
+             result: options[:body]}
+
     options[:headers].each { |k, v| response[k.to_s] = v }
 
     render json: body, status: options[:status]

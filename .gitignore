@@ -1,1 +1,7 @@
+.idea
+
+!**/.keep
+
 /nginx/log
+
+/src

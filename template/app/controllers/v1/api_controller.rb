@@ -23,7 +23,6 @@ module V1
           unauthorized
         end
       rescue StandardError => e
-        log e
         unauthorized
       end
     end

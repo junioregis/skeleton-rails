@@ -1,6 +1,6 @@
 # Introduction
 
-Complete guide to create Dockerized Ruby on Rails API with VirtualBox VM for deployment test.
+Complete guide to create Dockerized Ruby on Rails Api REST inside Virtual Box with Capistrano deployment.
 
 # Operating System
 
@@ -53,37 +53,37 @@ netmask 255.255.255.0
 
 # 2. Configure Repositories
 
-### Connect to Virtual Machine
+### 2.1 Connect to Virtual Machine
 
 ```bash
 ssh ubuntu@192.168.56.10
 ```
 
-### Generate Access Key
+### 2.2 Generate Access Key
 
 ```
 ssh-keygen -t rsa
 ```
 
-### Copy Generated Key
+### 2.3 Copy Generated Key
 
 ```
 cat ~/.ssh/id_rsa.pub
 ```
 
-### Add Keys
+### 2.4 Add Keys
 
 ##### Bitbucket
 
-```Bitbucket > Repository > Settings > Access Keys > Add Key > Key > PASTE VALUE```
+```Bitbucket > Repository > Settings > Access Keys > Add Key > Key > PASTE KEY```
 
 ##### Github
 
-```TODO```
+```Github > Repository > Settings > Deploy Keys > Add Deploy Key > Key > PASTE KEY```
 
 # 3. Configure Virtual Machine
 
-### Install
+### 3.1 Install
 
 ```bash
 ssh ubuntu@192.168.56.10 'bash -s' < scripts/vps/install.sh
@@ -91,7 +91,7 @@ ssh ubuntu@192.168.56.10 'bash -s' < scripts/vps/install.sh
 
 ```Waiting for system rebooting```
 
-### Generate Certs
+### 3.2 Generate Certs
 
 ```bash
 scp -r certs ubuntu@192.168.56.10:/tmp/
@@ -100,21 +100,49 @@ ssh ubuntu@192.168.56.10 'bash -s' < scripts/vps/certs.sh
 
 # 4. Development
 
-### Init
+### 4.1 Initialize Project
 
 ```bash
 bash scripts/dev.sh init
 ```
 
+##### 4.1.1 Configure Master Key
+
 Copy Master Key value inside ```./src/config/master.key``` to ```RAILS_MASTER_KEY``` variable inside ```./env/common.env``` 
 
-### Build
+##### 4.1.2 Configure Slack API
+
+```https://api.slack.com```
+
+Get ```Bot User OAuth Access Token``` and configure credentials.
+
+Execute:
+
+```bash
+bash scripts/dev.sh credentials
+```
+
+```
+...
+
+slack:
+    token: <PASTE_TOKEN_HERE>
+    channel: <PASTE_CHANNEL_NAME>
+```
+
+Restrt Services:
+
+```bash
+bash scripts/dev.sh restart
+```
+
+### 4.2 Build
 
 ```bash
 bash scripts/dev.sh build
 ```
 
-### Start
+### 4.3 Start
 
 ```bash
 bash scripts/dev.sh start
@@ -125,11 +153,12 @@ bash scripts/dev.sh start
 ```./scripts/dev.sh```
 
 Command     | Info
-------------|----------
+------------|-----------------------------
 init        | Initialize project structure
 build       | Build services
 start       | Start services
 stop        | Stop services
+restart     | Restart services
 logs        | Show logs
 terminal    | Open terminal
 permissions | Check permissions
@@ -137,9 +166,49 @@ credentials | Edit credentials
 
 # 5. Access
 
-### App
+### 5.1 Get Access Token from Provider
 
-[http://localhost:3000](http://localhost:3000)
+##### Facebook
+
+```https://developers.facebook.com/tools/explorer```
+
+scopes:
+
+```
+email
+user_gender
+```
+
+##### Google
+
+```https://developers.google.com/oauthplayground```
+
+scope:
+
+```
+https://www.googleapis.com/auth/userinfo.email
+https://www.googleapis.com/auth/userinfo.profile
+```
+
+### 5.2 Get Authorization Token
+
+```
+curl -X POST -H 'Content-type: application/json; charset:utf-8' \
+             -H 'Api-Version: 1' \
+             --data '{"provider":"<PROVIDER>", \
+                      "provider_id":"<PROVIDER_ID>", \
+                      "access_token":"<ACCESS_TOKEN>"}' \
+        http://localhost:3000/auth/token
+```
+
+### 5.3 Ping Server
+
+```
+curl -X GET -H 'Content-type: application/json; charset:utf-8' \
+            -H 'Api-Version: 1' \
+            -H 'Authorization: "Bearer <TOKEN_HERE>"' \
+        http://localhost:3000/server/ping
+```
 
 ### PgAdmin
 
@@ -156,37 +225,24 @@ password: admin
 
 # 6. Deploy
 
-### Enter terminal
+### 6.1 Enter terminal
 
 ```bash
 bash scripts/dev.sh terminal
 ```
 
-##### Deploy
+### 6.2 Deploy
+
+##### First Deploy
 
 ```bash
-# Check
-cap production deploy:check
-```
-
-```bash
-# First deploy
 cap production deploy:init
 ```
 
+##### Deploy
+
 ```bash
-# Deploy
 cap production deploy
-```
-
-### Edit Hosts
-
-```/etc/hosts```
-
-```
-192.168.56.10 api.domain.com
-192.168.56.10 db.domain.com
-192.168.56.10 portainer.domain.com
 ```
 
 ### Deployer Commands
@@ -196,6 +252,16 @@ cap production deploy
 Command | Info
 --------|----------
 logs    | Show logs
+
+### 6.3 Edit Hosts
+
+```/etc/hosts```
+
+```
+192.168.56.10 api.domain.com
+192.168.56.10 db.domain.com
+192.168.56.10 portainer.domain.com
+```
 
 # 7. Access
 

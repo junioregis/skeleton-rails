@@ -1,10 +1,13 @@
 #!/bin/bash
 
-SERVICES="app db_admin portainer"
+SERVICES="app db db_admin portainer"
 
 CMD="docker-compose --project-name=api -f docker-compose.yml -f docker-compose.dev.yml"
 
 function init {
+    # Copy Template
+    cp template/* src/ -R
+
     # Build Services
     ${CMD} build app
 
@@ -43,6 +46,10 @@ function stop {
     ${CMD} down
 }
 
+function restart {
+    ${CMD} restart ${SERVICES}
+}
+
 function logs {
     ${CMD} logs -f app
 }
@@ -76,6 +83,10 @@ case "$1" in
         echo –n "Stopping..."
         stop
         ;;
+    restart)
+        echo –n "Restarting..."
+        restart
+        ;;
     logs) 
         logs
         ;;
@@ -89,7 +100,7 @@ case "$1" in
         credentials
         ;;
     *)
-        echo "Usage: bash dev.sh init|build|start|stop|logs|terminal|permissions|credentials"
+        echo "Usage: bash dev.sh init|build|start|stop|restart|logs|terminal|permissions|credentials"
         exit 1
     ;;
 esac

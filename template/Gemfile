@@ -40,4 +40,3 @@ gem 'rack-attack'
 
 # utils
 gem 'jwt'
-gem 'httparty'
