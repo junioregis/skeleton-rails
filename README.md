@@ -1,6 +1,6 @@
 # Introduction
 
-This is a complete guide to create Dockerized Ruby on Rails Api project with Google and Facebook login.
+This is a complete guide to create Dockerized Ruby on Rails Api project with Facebook and Google login.
 
 # Versions
 
