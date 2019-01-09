@@ -36,3 +36,7 @@ Nginx          | 1.15
 18. Postman routes
 19. Auto-Signed Certified generator script (KEY, SRT, P12, PEM, DER, BKS)
 20. Default localization is PT-BR (America/Sao_Paulo)
+
+# Wiki
+
+You can see [wiki here](https://github.com/junioregis/skeleton-rails/wiki).
