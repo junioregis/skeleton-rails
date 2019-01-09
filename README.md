@@ -5,7 +5,7 @@ This is a complete guide to create Dockerized Ruby on Rails Api project with Goo
 # Versions
 
 Name           | Version
----------------|--------
+---------------|----------------
 Docker         | 18
 Docker Compose | 3.6
 Ruby           | 2.6.0
@@ -13,6 +13,7 @@ Rails          | 5.2.2
 Postgres       | 11
 Redis          | 5.0
 Nginx          | 1.15
+Ubuntu (VPS)   | 16.04.5 - 64bit
 
 # Features
 
