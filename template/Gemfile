@@ -1,42 +1,55 @@
 source 'https://rubygems.org'
 
-ruby '2.5.3'
+ruby '2.6.0'
 
-# rails
-gem 'rails', '~> 5.2.1'
+# Rails
+gem 'rails', '~> 5.2.2'
 
-# database
+# Database
 gem 'pg', '>= 0.18', '< 2.0'
 
-# server
+# Server
 gem 'puma', '~> 3.11'
 
-# image
+# Redis
+gem 'redis', '~> 4.0'
+
+# Image Processor
 gem 'mini_magick', '~> 4.8'
 
-# boot faster
+# Boot Faster
 gem 'bootsnap', '>= 1.1.0', require: false
 
-group :development do
-  # deploy
-  gem 'capistrano-rails'
+# JSON Generator
+gem 'jbuilder', '~> 2.5'
 
-  # listen for file modifications
+group :development do
+  # Deploy
+  gem 'capistrano', '~> 3.11', require: false
+
+  # Listen for File Modifications
   gem 'listen', '>= 3.0.5', '< 3.2'
 
-  # preloads app faster
+  # Preloads App Faster
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :development, :test do
-  # fake data
+  # Fake Data
   gem 'faker'
 end
 
-# racks
+# Racks
 gem 'rack-cors'
 gem 'rack-attack'
 
-# utils
-gem 'jwt'
+# OAuth
+gem 'doorkeeper'
+gem 'doorkeeper-i18n'
+gem 'doorkeeper-grants_assertion'
+
+# Scrap
+gem 'phantomjs'
+gem 'selenium-webdriver'
+gem 'mechanize'

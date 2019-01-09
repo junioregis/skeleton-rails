@@ -1,11 +1,11 @@
 module V1
   class ProfilesController < ApiController
     def me
-      body = { 
-        name:   current_user.profile.name,
-        gender: current_user.profile.gender,
-        age:    current_user.profile.age,
-        avatar: rails_blob_url(current_user.profile.avatar)
+      body = {
+          name: current_user.profile.name,
+          gender: current_user.profile.gender,
+          age: current_user.profile.age,
+          avatar: current_user.profile.avatar
       }
 
       r body: body

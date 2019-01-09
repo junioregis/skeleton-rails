@@ -1,4 +1,4 @@
-FROM ruby:2.5.3-alpine
+FROM ruby:2.6.0-alpine
 
 ARG APP_PATH='/app'
 ARG TIMEZONE=America/Sao_Paulo

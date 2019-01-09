@@ -1,106 +1,110 @@
 #!/bin/bash
 
-SERVICES="app db db_admin portainer"
+PROJECT_NAME="skeleton_rails"
 
-CMD="docker-compose --project-name=api -f docker-compose.yml -f docker-compose.dev.yml"
+SERVICES="app redis db db_admin selenium portainer"
+
+CMD="docker-compose --project-name=${PROJECT_NAME} -f docker-compose.yml -f docker-compose.dev.yml"
 
 function init {
-    # Copy Template
-    cp template/* src/ -R
+  # Copy Template
+  cp -R template/* src/
 
-    # Build Services
-    ${CMD} build app
+  # Build Services
+  ${CMD} build app
 
-    # Start Services
-    ${CMD} up -d app
+  # Start Services
+  ${CMD} up -d app
 
-    # Create Project Structure
-    ${CMD} run -e RAILS_MASTER_KEY app \
-            rails new . \
-                --api \
-                --skip \
-                --skip-git \
-                --skip-bundle \
-                --skip-gemfile \
-                --database=postgresql
+  # Create Project Structure
+  ${CMD} run --rm -e RAILS_MASTER_KEY app \
+    rails new . \
+      --api \
+      --skip \
+      --skip-git \
+      --skip-bundle \
+      --skip-gemfile \
+      --database=postgresql
 
-    # Initialize Database
-    ${CMD} run app rake db:setup
+  # Initialize Database
+  ${CMD} run app rake db:setup
 
-    # Stop Services
-    ${CMD} down
+  # Stop Services
+  ${CMD} down
 
-    # Check Permissions
-    permissions
+  # Check Permissions
+  permissions
+}
+
+function gen-secret {
+  ${CMD} exec app rake secret
 }
 
 function build {
-    ${CMD} build
+  ${CMD} build
 }
 
 function start {
-    ${CMD} up -d ${SERVICES}
+  ${CMD} up -d ${SERVICES}
 }
 
 function stop {
-    ${CMD} down
+  ${CMD} down
 }
 
 function restart {
-    ${CMD} restart ${SERVICES}
+  ${CMD} restart ${SERVICES}
 }
 
 function logs {
-    ${CMD} logs -f app
+  ${CMD} logs -f app
 }
 
 function terminal {
-    ${CMD} exec app sh
+  ${CMD} exec app sh
 }
 
 function credentials {
-    ${CMD} exec -e EDITOR=nano app rails credentials:edit
+  ${CMD} exec -e EDITOR=nano app rails credentials:edit
 }
 
 function permissions {
-    sudo chown -R ${USER}:${USER} .
+  sudo chown -R ${USER} .
 }
 
 case "$1" in
-    init)
-        echo –n "Initializing..."
-        init
-        ;;
-    build)
-        echo –n "Building..."
-        build
-        ;;
-    start)
-        echo –n "Starting..."
-        start
-        ;;
-    stop) 
-        echo –n "Stopping..."
-        stop
-        ;;
-    restart)
-        echo –n "Restarting..."
-        restart
-        ;;
-    logs) 
-        logs
-        ;;
-    terminal) 
-        terminal
-        ;;
-    permissions) 
-        permissions
-        ;;
-    credentials) 
-        credentials
-        ;;
-    *)
-        echo "Usage: bash dev.sh init|build|start|stop|restart|logs|terminal|permissions|credentials"
-        exit 1
+  init)
+    init
     ;;
+  gen-secret)
+    gen-secret
+    ;;
+  build)
+    build
+    ;;
+  start)
+    start
+    ;;
+  stop) 
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  logs) 
+    logs
+    ;;
+  terminal) 
+    terminal
+    ;;
+  permissions) 
+    permissions
+    ;;
+  credentials) 
+    credentials
+    ;;
+  *)
+    echo "Usage: bash dev.sh init|gen-secret|build|start|stop|restart|logs|terminal|permissions|credentials"
+    exit 1
+  ;;
 esac

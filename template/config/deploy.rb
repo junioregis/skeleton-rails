@@ -2,23 +2,21 @@ lock '~> 3.11.0'
 
 set :application, 'api'
 
-set :repo_url, 'git@bitbucket.org:dev-onarion/skeleton-rails.git'
+set :repo_url, '<PASTE_REPOSITORY_URL_HERE>'
 set :branch, 'master'
 
 set :user, 'ubuntu'
 set :pty, true
 set :ssh_options, {
-  forward_agent: true,
-  auth_methods: %w[publickey password],
-  keys: %w[tmp/default.pem]
+    forward_agent: true,
+    auth_methods: %w[publickey password],
+    keys: %w[tmp/default.pem]
 }
 
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :keep_releases, 5
 
-append :linked_dirs, 'src/log',
-                     'src/storage',
-                     'nginx/log'
+append :linked_dirs, 'src/log', 'src/storage', 'nginx/log'
 
 namespace :deploy do
   task :init do
@@ -38,10 +36,10 @@ namespace :docker do
     on roles(:app) do
       within current_path do
         execute("docker-compose",
-          "--project-name=#{fetch(:application)}",
-          "-f", "docker-compose.yml",
-          "-f", "docker-compose.prd.yml",
-          "build"
+                "--project-name=#{fetch(:application)}",
+                "-f", "docker-compose.yml",
+                "-f", "docker-compose.prd.yml",
+                "build"
         )
       end
     end
@@ -51,11 +49,11 @@ namespace :docker do
     on roles(:app) do
       within current_path do
         execute("docker-compose",
-          "--project-name=#{fetch(:application)}",
-          "-f", "docker-compose.yml",
-          "-f", "docker-compose.prd.yml",
-          "up", "-d", "--remove-orphans"
-        )   
+                "--project-name=#{fetch(:application)}",
+                "-f", "docker-compose.yml",
+                "-f", "docker-compose.prd.yml",
+                "up", "-d", "--remove-orphans"
+        )
       end
     end
   end
@@ -66,11 +64,11 @@ namespace :db do
     on roles(:app) do
       within current_path do
         execute("docker-compose",
-          "--project-name=#{fetch(:application)}",
-          "-f", "docker-compose.yml",
-          "-f", "docker-compose.prd.yml",
-          "exec", "-d", "app",
-          "rake", "db:setup"
+                "--project-name=#{fetch(:application)}",
+                "-f", "docker-compose.yml",
+                "-f", "docker-compose.prd.yml",
+                "exec", "-d", "app",
+                "rake", "db:setup"
         )
       end
     end
@@ -80,11 +78,11 @@ namespace :db do
     on roles(:app) do
       within current_path do
         execute("docker-compose",
-          "--project-name=#{fetch(:application)}",
-          "-f", "docker-compose.yml",
-          "-f", "docker-compose.prd.yml",
-          "exec", "-d", "app",
-          "rake", "db:migrate"
+                "--project-name=#{fetch(:application)}",
+                "-f", "docker-compose.yml",
+                "-f", "docker-compose.prd.yml",
+                "exec", "-d", "app",
+                "rake", "db:migrate"
         )
       end
     end
@@ -95,7 +93,7 @@ namespace :check do
   task :permissions do
     on roles(:app) do
       within deploy_path do
-        execute("sudo", "chown", "${USER}:${USER}", ".", "-R") 
+        execute("sudo", "chown", "${USER}:${USER}", ".", "-R")
       end
     end
   end

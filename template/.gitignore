@@ -1,11 +1,15 @@
-/.bundle
+/log
+/tmp
+/public/system
 
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+config/master.key
+
+/.bundle
+/vendor/bundle
+
+/public/packs
+/public/packs-test
+/public/assets
 
 /storage/*
 !/storage/.keep
-
-/config/master.key

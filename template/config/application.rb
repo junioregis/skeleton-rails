@@ -17,7 +17,7 @@ module App
   class Application < Rails::Application
     config.load_defaults 5.2
     config.api_only = true
-    config.i18n.default_locale = :pt_BR
+    config.i18n.default_locale = 'pt-BR'
   
     config.middleware.use Rack::Attack
   end

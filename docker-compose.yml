@@ -39,6 +39,16 @@ services:
     depends_on:
       - db
 
+  redis:
+    image: redis:5.0-alpine
+    command: redis-server --port 6379
+    networks:
+      - backend
+    expose:
+      - 6379
+    depends_on:
+      - app
+
   db:
     image: postgres:11-alpine
     env_file:
@@ -63,6 +73,15 @@ services:
       - 80
     depends_on:
       - db
+
+  selenium:
+    image: selenium/standalone-chrome
+    networks:
+      - backend
+    volumes:
+      - /dev/shm:/dev/shm
+    expose:
+      - 4444
 
   portainer:
     image: portainer/portainer:latest

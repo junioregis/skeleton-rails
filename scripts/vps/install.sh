@@ -23,16 +23,6 @@ failure() {
   message "FAILURE"
 }
 
-##################
-# Initial Config #
-##################
-
-step "Initial Config"
-
-sudo sh -c "echo '${USER} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
-
-success
-
 ############
 # Timezone #
 ############

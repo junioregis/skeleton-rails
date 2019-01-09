@@ -26,6 +26,9 @@ services:
     env_file:
       - ./env/production.env
 
+  redis:
+    restart: always
+
   db_admin:
     restart: always
     env_file:
@@ -33,6 +36,9 @@ services:
     environment:
       VIRTUAL_HOST: db.domain.com
       VIRTUAL_PORT: 80
+
+  selenium:
+    restart: always
 
   portainer:
     restart: always
