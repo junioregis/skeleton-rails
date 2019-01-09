@@ -34,7 +34,7 @@ Nginx          | 1.15
 16. PgAdmin for database admin
 17. Nginx proxy ready
 18. Postman routes
-19. Auto-Signed Certified generator script (KEY, SRT, P12, PEM, DER, BKS)
+19. Auto-Signed Certified generator (KEY, CRT, P12, PEM, DER, BKS)
 20. Default localization is PT-BR (America/Sao_Paulo)
 
 # Wiki
