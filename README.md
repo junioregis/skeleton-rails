@@ -1,11 +1,11 @@
 # Introduction
 
-Complete guide to create Dockerized ```Ruby on Rails Api``` project with mobile ready.
+This is a complete guide to create Dockerized Ruby on Rails Api project with Facebook and Google login.
 
 # Versions
 
 Name           | Version
----------------|--------
+---------------|----------------
 Docker         | 18
 Docker Compose | 3.6
 Ruby           | 2.6.0
@@ -13,6 +13,7 @@ Rails          | 5.2.2
 Postgres       | 11
 Redis          | 5.0
 Nginx          | 1.15
+Ubuntu (VPS)   | 16.04.5 - 64bit
 
 # Features
 
@@ -34,5 +35,9 @@ Nginx          | 1.15
 16. PgAdmin for database admin
 17. Nginx proxy ready
 18. Postman routes
-19. Auto-Signed Certified generator script (KEY, SRT, P12, PEM, DER, BKS)
+19. Auto-Signed Certified generator (KEY, CRT, P12, PEM, DER, BKS)
 20. Default localization is PT-BR (America/Sao_Paulo)
+
+# Wiki
+
+You can see [wiki here](https://github.com/junioregis/skeleton-rails/wiki).

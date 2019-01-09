@@ -1,31 +1,30 @@
-# 1. Connect to Virtual Machine (host)
+# 2.1. Connect to Virtual Machine
 
 ```bash
 ssh ubuntu@domain.com
 ```
 
-# 2. Configure User
+# 2.2. Configure User
 
-```
 ```bash
 sudo sh -c "echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
 ```
 
-# 3. Configure Repositories
+# 2.3. Configure Repositories
 
-### 3.1 Generate Access Key
+### 2.3.1. Generate Access Key
 
 ```bash
 ssh-keygen -t rsa
 ```
 
-### 3.2 Copy Generated Key
+### 2.3.2. Copy Generated Key
 
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
 
-### 3.3 Configure Repository
+### 2.3.3. Configure Repository
 
 ##### Bitbucket
 
@@ -35,7 +34,7 @@ cat ~/.ssh/id_rsa.pub
 
 ```Github > Repository > Settings > Deploy Keys > Add Deploy Key > Key > PASTE KEY```
 
-# 4. Install (host)
+# 2.4. Install
 
 ```bash
 ssh ubuntu@domain.com 'bash -s' < scripts/vps/install.sh
@@ -43,7 +42,7 @@ ssh ubuntu@domain.com 'bash -s' < scripts/vps/install.sh
 
 ```Wait for system rebooting```
 
-# 5. Generate Certs (host)
+# 2.5. Generate Certs
 
 ```bash
 scp -r certs ubuntu@domain.com:/tmp/

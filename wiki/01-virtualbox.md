@@ -1,4 +1,4 @@
-# 1. Create Host Network Adapter
+# 1.1. Create Host Network Adapter
 
 ```File > Host Network Manager > Create```
 
@@ -6,13 +6,13 @@ IPv4 Address | IPv4 Network Mask | DHCP Server
 -------------|-------------------|------------
 192.168.56.1 | 255.255.255.0     | DISABLED
 
-# 2. Create Virtual Machine
+# 1.2. Create Virtual Machine
 
 CPU    | RAM     | HD
 -------|---------|------
 1 Core | 1024 MB | 20 GB
 
-# 3. Configure Network Adapters 
+# 1.3. Configure Network Adapters 
 
 ##### Adapter 1
 
@@ -22,13 +22,13 @@ CPU    | RAM     | HD
 
 ```Virtual Machine -> Settings -> Network -> Adapter 2 > Attached to > Host-only Adapter```
 
-# 4. Download Ubuntu Server Image
+# 1.4. Download Ubuntu Server Image
 
 *Ubuntu 16.04.5 - 64bit*
 
 [https://www.ubuntu.com/download/alternative-downloads](https://www.ubuntu.com/download/alternative-downloads)
 
-# 5. Install System
+# 1.5. Install System
 
 ##### Credentials:
 
@@ -43,11 +43,9 @@ Pass: ubuntu
 sudo apt update && sudo apt install openssh-server
 ```
 
-# 6. Configure Host
+# 1.6. Configure Host
 
 ##### Edit Hosts
-
-```/etc/hosts```
 
 ```
 192.168.56.10 domain.com
@@ -56,7 +54,7 @@ sudo apt update && sudo apt install openssh-server
 192.168.56.10 portainer.domain.com
 ```
 
-# 7. Edit Network Interfaces
+# 1.7. Edit Network Interfaces
 
 ##### Execute:
 

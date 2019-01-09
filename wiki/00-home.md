@@ -1,0 +1,1 @@
+This is a complete guide to create Dockerized Ruby on Rails Api project with Facebook and Google login.

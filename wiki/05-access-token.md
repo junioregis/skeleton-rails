@@ -1,4 +1,4 @@
-# 1. Get Access Token from Provider
+# 5.1. Get Access Token from Provider
 
 ### Facebook
 
@@ -24,7 +24,7 @@ https://www.googleapis.com/auth/userinfo.profile
 https://www.googleapis.com/auth/user.birthday.read
 ```
 
-# 2. Get Authorization Token
+# 5.2. Get Authorization Token
 
 ```bash
 curl --insecure -X POST \
@@ -33,7 +33,7 @@ curl --insecure -X POST \
      "https://api.domain.com/oauth/token"
 ```
 
-# 3. Ping Server'
+# 5.3. Ping Server
 
 ```bash
 curl --insecure -X GET \
