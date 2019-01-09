@@ -1,4 +1,4 @@
-# 1. Deploy to Heroku
+# 4.1. Deploy to Heroku
 
 ##### Install Heroku Client
 
@@ -31,9 +31,9 @@ first-deploy | First deploy
 deploy       | Deploy
 logs         | Show logs
 
-# 2. Deploy to Virtual Machine
+# 4.2. Deploy to Virtual Machine
 
-##### 2.1. Enter Terminal
+##### 4.2.1. Enter Terminal
 
 ```bash
 bash scripts/dev.sh terminal
@@ -59,7 +59,7 @@ Command | Info
 --------|----------
 logs    | Show logs
 
-# 3. Stop Services
+# 4.3. Stop Services
 
 ```bash
 bash scripts/dev.sh stop
@@ -96,9 +96,9 @@ first-deploy | First deploy
 deploy       | Deploy
 logs         | Show logs
 
-# 2. Deploy to Virtual Machine
+# 4.2. Deploy to Virtual Machine
 
-##### 2.1. Enter Terminal
+##### 4.2.1. Enter Terminal
 
 ```bash
 bash scripts/dev.sh terminal
@@ -124,7 +124,7 @@ Command | Info
 --------|----------
 logs    | Show logs
 
-# 3. Stop Services
+# 4.3. Stop Services
 
 ```bash
 bash scripts/dev.sh stop
