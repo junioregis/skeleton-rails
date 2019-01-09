@@ -23,7 +23,13 @@ Copy Master Key value inside ```src/config/master.key``` to:
 - *RAILS_MASTER_KEY* variable inside ```env/common.env```
 - *APP_MASTER_KEY* variable inside ```scripts/heroku.sh```
 
-###### 3.4.2. Generate Secret
+###### 3.4.2. Restart Services
+
+```bash
+bash scripts/dev.sh restart
+ ```
+
+###### 3.4.3. Generate Secret
 
 ```bash
 bash scripts/dev.sh gen-secret
