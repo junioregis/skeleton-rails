@@ -1,6 +1,6 @@
 # Introduction
 
-Complete guide to create Dockerized ```Ruby on Rails Api``` project with mobile ready.
+This is a complete guide to create Dockerized Ruby on Rails Api project with Google and Facebook login.
 
 # Versions
 
