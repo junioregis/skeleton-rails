@@ -10,7 +10,7 @@ module Log
   end
 
   def self.error(msg)
-    project_files = Dir.glob("**/*").select {|f| File.file?(f)}
+    project_files = Dir.glob('**/*').select {|f| File.file?(f)}
 
     print :error, msg
 
@@ -18,19 +18,15 @@ module Log
       msg.backtrace.select {|line| project_files.any? {|p| line.include? p}}.each {|line| print(:error, line)}
     end
 
-    # TODO: Slack
-
-    #Thread.new do
-    #  SlackService::send(title, message)
-    #rescue StandardError => e
-    #  logger.debug e
-    #end
+    unless Rails.env.development?
+      SlackJob.perform_later({title: 'Error', message: msg})
+    end
   end
 
   private
 
   def self.print(type, msg)
-    color = case (type)
+    color = case type
             when :debug then
               :blue
             when :success then
@@ -43,7 +39,7 @@ module Log
 
     output = ActiveSupport::LogSubscriber.new.send(:color, msg, color)
 
-    case (type)
+    case type
     when :error then
       LOGGER.error output
     else
