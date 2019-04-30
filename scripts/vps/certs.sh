@@ -1,15 +1,13 @@
 #!/bin/bash
 
-WORKDIR=/tmp/certs
-CERTS_DIR=/home/ubuntu/certs
+PATH=/home/${USER}/certs
 
-DOCKER_IMAGE=certs_gen
-DOCKER_CONTAINER=certs_gen
+mkdir ${PATH}
 
-mkdir ${CERTS_DIR}
+ARCH=""
+#ARCH="--file docker-compose.prd.arm32v7.yml"
 
-docker build -f ${WORKDIR}/Dockerfile --tag=${DOCKER_IMAGE} ${WORKDIR}
-docker run --rm --name ${DOCKER_CONTAINER} -v ${CERTS_DIR}:/certs ${DOCKER_IMAGE}
-docker rmi ${DOCKER_IMAGE}
+CMD="docker-compose --file docker-compose.yml ${ARCH}"
 
-sudo chown ${USER}:${USER} ~/certs -R
+${CMD} build certs_generator
+${CMD} run --rm certs_generator

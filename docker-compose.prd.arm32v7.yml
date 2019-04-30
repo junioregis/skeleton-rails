@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      args:
+        IMAGE: arm32v7/ruby:2.6.3-alpine
+
+  bundle:
+    image: arm32v7/busybox:latest
+
+  redis:
+    image: arm32v7/redis:5-alpine
+
+  db:
+    image: arm32v7/postgres:11-alpine
+
+  selenium:
+    image: chadbutz/rpi-selenium-standalone-chrome:latest
+
+  certs_generator:
+    build:
+      args:
+        IMAGE: arm32v7/openjdk:8-jdk-alpine
+
+  server:
+    build:
+      args:
+        IMAGE: arm32v7/nginx:1.15
+
+  proxy:
+    image: budry/jwilder-nginx-proxy-arm:latest
+
+  letsencrypt:
+    image: budry/jrcs-letsencrypt-nginx-proxy-companion-arm:latest
+
+  portainer:
+    image: portainer/portainer:linux-arm

@@ -3,30 +3,15 @@ ActiveRecord::Schema.define(version: 1) do
   enable_extension :pgcrypto
   enable_extension :plpgsql
 
-  # OAuth: Applications
-  create_table :oauth_applications, id: :uuid, force: :cascade do |t|
-    t.string :name, null: false
-    t.string :uid, null: false, index: true, unique: true
-    t.string :secret, null: false
-    t.text :redirect_uri, null: false
-    t.string :scopes, default: '', null: false
-    t.boolean :confidential, default: true, null: false
-    t.datetime :created_at, null: false
-    t.datetime :updated_at, null: false
+  # Admin: Users
+  create_table :admin_users, id: :uuid, force: :cascade do |t|
+    t.string :email, default: '', null: false, index: true
+    t.string :encrypted_password, default: '', null: false
+    t.string :reset_password_token, index: true, unique: true
+    t.datetime :reset_password_sent_at
+    t.datetime :remember_created_at
+    t.timestamps
   end
-
-  # OAuth: Access Grants
-  create_table :oauth_access_grants, id: :uuid, force: :cascade do |t|
-    t.uuid :resource_owner_id, null: false, index: true
-    t.uuid :application_id, index: true
-    t.string :token, null: false, index: true, unique: true
-    t.integer :expires_in, null: false
-    t.text :redirect_uri, null: false
-    t.datetime :created_at, null: false
-    t.datetime :revoked_at
-    t.string :scopes
-  end
-  add_foreign_key :oauth_access_grants, :oauth_applications, column: :application_id
 
   # OAuth: Access Tokens
   create_table :oauth_access_tokens, id: :uuid, force: :cascade do |t|
@@ -40,7 +25,6 @@ ActiveRecord::Schema.define(version: 1) do
     t.string :scopes
     t.string :previous_refresh_token, default: '', null: false
   end
-  add_foreign_key :oauth_access_tokens, :oauth_applications, column: :application_id
 
   # Attatchments
   create_table :active_storage_attachments, force: :cascade do |t|

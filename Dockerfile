@@ -1,9 +1,11 @@
-FROM ruby:2.6.0-alpine
+ARG IMAGE
 
-ARG APP_PATH='/app'
-ARG TIMEZONE=America/Sao_Paulo
+FROM $IMAGE
 
-RUN apk add --update \
+ARG APP_PATH="/app"
+ARG TIMEZONE="America/Sao_Paulo"
+
+RUN apk add --no-cache --update \
     build-base \
     imagemagick \
     linux-headers \
@@ -12,17 +14,16 @@ RUN apk add --update \
     postgresql-dev \
     tzdata
 
-RUN rm -rf /var/cache/apk/*
-
 RUN mkdir $APP_PATH
 
 WORKDIR $APP_PATH
 
-COPY src/Gemfile $APP_PATH/
-COPY src/Gemfile.lock $APP_PATH/
+COPY entrypoint.sh /usr/bin/
 
-RUN bundle install
+RUN chmod +x /usr/bin/entrypoint.sh
 
 RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /etc/timezone
 
 EXPOSE 3000
+
+ENTRYPOINT ["entrypoint.sh"]

@@ -1,9 +1,5 @@
 class DocsController < ApplicationController
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
-
   http_basic_authenticate_with name: 'admin', password: 'admin'
-
-  skip_before_action :doorkeeper_authorize!
 
   def postman
     @endpoints = $endpoints

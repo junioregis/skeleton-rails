@@ -2,7 +2,7 @@
 
 [https://api.domain.com](https://api.domain.com)
 
-##### Endpoints
+##### Endpoints:
 
 Method | Path           | Header                     | Params
 -------|----------------|----------------------------|----------------------------------
@@ -19,15 +19,12 @@ docs/v1  | admin    | admin
 
 Set endpoints for Postman generator on file ```src/config/initializers/endpoints.rb```
 
-# 6.2. Database Admin
+##### Admin:
 
-[https://db.domain.com](https://db.domain.com)
+Endpoint | Username | Password
+---------|----------|---------
+admin    | admin    | admin
 
-```
-username: admin
-password: admin
-```
-
-# 6.3. Portainer
+# 6.2. Portainer
 
 [https://portainer.domain.com](https://portainer.domain.com)

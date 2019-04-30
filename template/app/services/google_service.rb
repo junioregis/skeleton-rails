@@ -1,4 +1,4 @@
-require 'net/http'
+require 'httparty'
 
 # Google Service
 #
@@ -30,13 +30,13 @@ class GoogleService < SocialService
   private
 
   def url_info
-    URI.parse("#{URL}?access_token=#{@auth_code}&personFields=#{FIELDS}")
+    "#{URL}?access_token=#{@auth_code}&personFields=#{FIELDS}"
   end
 
   def user
-    response = Net::HTTP.get_response(url_info)
+    response = HTTParty.get(url_info)
 
-    if response.code == '200'
+    if response.code == 200
       json = JSON.parse(response.body)
       json.deep_symbolize_keys!
 

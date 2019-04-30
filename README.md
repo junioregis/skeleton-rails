@@ -1,42 +1,56 @@
 # Introduction
 
-This is a complete guide to create Dockerized Ruby on Rails Api project with Facebook and Google login.
+This is a complete guide to create Dockerized Ruby on Rails Api.
+
+# Resources
+
+1. VirtualBox configuration for VPS test
+2. Raspberry Pi 3 ready
+3. Redis ready
+4. Slack integration
+5. Capistrano for deployment
+6. Nginx reverse proxy
+7. Web scraper rake task
+8. Default localization is PT-BR (America/Sao_Paulo)
+
+# API
+
+1. Versioning
+2. OAuth2
+3. Social login with Facebook and Google
+4. Rack Attack (Blocking & Throttling)
+5. Cross-Origin Resource Sharing (CORS)
+6. Postman generator
+
+# Scripts
+
+1. Developer
+2. Deployer for Heroku
+3. Deployer for VPS
+
+# SSL
+
+1. Auto-Signed Certified (KEY, CRT, P12, PEM, DER, BKS)
+2. Letsencrypt (Certificate Authority)
+
+# Admin
+
+1. PgAdmin for database admin (Development only)
+2. ActiveAdmin for app admin
+3. Portainer for container management
 
 # Versions
 
 Name           | Version
----------------|----------------
+---------------|--------------
 Docker         | 18
-Docker Compose | 3.6
-Ruby           | 2.6.0
-Rails          | 5.2.2
+Docker Compose | latest
+Ruby           | 2.6.2
+Rails          | 5.2.3
 Postgres       | 11
-Redis          | 5.0
+Redis          | 5
 Nginx          | 1.15
-Ubuntu (VPS)   | 16.04.5 - 64bit
-
-# Features
-
- 1. VirtualBox configuration for deploy
- 2. API versioning
- 3. OAuth2 provider
- 4. Rack Attack
- 5. Rack Cors
- 6. Redis ready
- 7. Slack integration
- 8. Social Login with Facebook and Google
- 9. Web scraper rake task example
-10. Capistrano ready
-11. Developer script helper
-12. Deployer script helper for Heroku
-13. Deployer script helper for production
-14. Nginx server
-15. Portainer ready
-16. PgAdmin for database admin
-17. Nginx proxy ready
-18. Postman routes
-19. Auto-Signed Certified generator (KEY, CRT, P12, PEM, DER, BKS)
-20. Default localization is PT-BR (America/Sao_Paulo)
+Ubuntu (VPS)   | 16.04 - 64bit
 
 # Wiki
 

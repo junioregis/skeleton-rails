@@ -11,6 +11,8 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 
+require "sprockets/railtie"
+
 Bundler.require(*Rails.groups)
 
 module App
@@ -18,7 +20,12 @@ module App
     config.load_defaults 5.2
     config.api_only = true
     config.i18n.default_locale = 'pt-BR'
-  
+
+    # Middlewares
     config.middleware.use Rack::Attack
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end

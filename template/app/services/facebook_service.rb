@@ -1,4 +1,4 @@
-require 'net/http'
+require 'httparty'
 
 # Facebook Service
 #
@@ -30,13 +30,13 @@ class FacebookService < SocialService
   private
 
   def url_info
-    URI.parse("#{URL}?access_token=#{@auth_code}&fields=#{FIELDS}")
+    "#{URL}?access_token=#{@auth_code}&fields=#{FIELDS}"
   end
 
   def user
-    response = Net::HTTP.get_response(url_info)
+    response = HTTParty.get(url_info)
 
-    if response.code == '200'
+    if response.code == 200
       info = JSON.parse(response.body)
       info.deep_symbolize_keys!
 
@@ -51,6 +51,7 @@ class FacebookService < SocialService
       data
     else
       log_error response
+      nil
     end
   end
 

@@ -1,6 +1,6 @@
 Doorkeeper.configure do
   api_only
-  grant_flows %w(assertion)
+  grant_flows %w(password assertion refresh_token)
   access_token_expires_in 5.days
   use_refresh_token
 

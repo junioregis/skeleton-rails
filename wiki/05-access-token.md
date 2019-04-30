@@ -9,7 +9,7 @@
 ```
 email
 user_gender
-birthday
+user_birthday
 ```
 
 ### Google
@@ -41,4 +41,13 @@ curl --insecure -X GET \
      -H "Api-Version: 1" \
      -H "Authorization: Bearer <API_ACCESS_TOKEN>" \
      "https://api.domain.com/server/ping"
+```
+
+# 5.4. Refresh Token
+
+```bash
+curl --insecure -X POST \
+     -H "Content-type: application/json" \
+     -d '{"grant_type":"refresh_token", "refresh_token":"<API_ACCESS_TOKEN>"}' \
+     "https://api.domain.com/oauth/token"
 ```

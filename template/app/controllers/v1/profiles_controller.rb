@@ -2,6 +2,7 @@ module V1
   class ProfilesController < ApiController
     def me
       body = {
+          id: current_user.id,
           name: current_user.profile.name,
           gender: current_user.profile.gender,
           age: current_user.profile.age,

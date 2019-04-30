@@ -1,9 +1,6 @@
 #!/bin/bash
 
-APP_NAME=""
-
-APP_SECRET=""
-APP_MASTER_KEY=""
+APP_NAME="skeleton-rails"
 
 function install-cli {
   # Install CLI
@@ -14,6 +11,9 @@ function install-cli {
 }
 
 function first-deploy {
+  APP_SECRET=$(bash scripts/dev.sh gen-secret)
+  APP_MASTER_KEY=$(cat src/config/master.key)
+
   # Set App
   heroku git:remote -a ${APP_NAME}
   heroku access --app ${APP_NAME}
@@ -48,6 +48,7 @@ function first-deploy {
   # Create database
   heroku run rake db:migrate
   heroku run rake db:schema:load
+  heroku run rake db:seed
 }
 
 function deploy {

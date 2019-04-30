@@ -1,9 +1,12 @@
-version: '3.6'
+version: '3.7'
+
+volumes:
+  db_admin:
 
 services:
   app:
     restart: "no"
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bin/rails server -p 3000 -b '0.0.0.0'
     ports:
       - 3000:3000
 
@@ -17,11 +20,19 @@ services:
 
   db_admin:
     restart: "no"
+    image: dpage/pgadmin4:latest
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - db_admin:/var/lib/pgadmin
+    ports:
+      - 8000:80
+    depends_on:
+      - db
     environment:
       PGADMIN_DEFAULT_EMAIL: admin
       PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - 8000:80
 
   selenium:
     restart: "no"

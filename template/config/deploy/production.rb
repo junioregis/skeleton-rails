@@ -1,1 +1,1 @@
-server '192.168.56.10', user: 'ubuntu', password: 'ubuntu', roles: %w{app}
+server 'junioregis.ddns.net', user: 'pi', password: 'raspberry', roles: %w{app}

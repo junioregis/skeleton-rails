@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.6.0'
+ruby '2.6.3'
 
 # Rails
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.3'
 
 # Database
 gem 'pg', '>= 0.18', '< 2.0'
@@ -44,10 +44,19 @@ end
 gem 'rack-cors'
 gem 'rack-attack'
 
-# OAuth
+# Admin
+gem 'activeadmin'
+
+# Devise
+gem 'devise'
+
+# OAuth 2.0
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
 gem 'doorkeeper-grants_assertion'
+
+# Http
+gem 'httparty'
 
 # Scrap
 gem 'phantomjs'

@@ -24,7 +24,7 @@ CPU    | RAM     | HD
 
 # 1.4. Download Ubuntu Server Image
 
-*Ubuntu 16.04.5 - 64bit*
+*Ubuntu 16.04 - 64bit*
 
 [https://www.ubuntu.com/download/alternative-downloads](https://www.ubuntu.com/download/alternative-downloads)
 
@@ -50,7 +50,6 @@ sudo apt update && sudo apt install openssh-server
 ```
 192.168.56.10 domain.com
 192.168.56.10 api.domain.com
-192.168.56.10 db.domain.com
 192.168.56.10 portainer.domain.com
 ```
 

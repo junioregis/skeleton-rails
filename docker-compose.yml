@@ -1,46 +1,44 @@
-version: '3.6'
+version: '3.7'
 
 networks:
   frontend:
   backend:
 
 volumes:
+  bundle:
   db:
-  db_admin:
   storage:
   portainer:
 
 services:
-  server:
-    build: ./nginx
-    env_file:
-      - ./env/common.env
-    volumes:
-      - ./nginx/log:/var/log/nginx
-    networks:
-      - frontend
-      - backend
-    expose:
-      - 80
-    depends_on:
-      - app
-
   app:
-    build: .
-    env_file:
-      - ./env/common.env
+    build:
+      context: .
+      args:
+        IMAGE: ruby:2.6.3-alpine
+    stdin_open: true
+    tty: true
     volumes:
       - ./src:/app
       - storage:/app/storage
+      - bundle:/usr/local/bundle
     networks:
       - backend
     expose:
       - 3000
     depends_on:
+      - bundle
       - db
+      - selenium
+    user: ${CURRENT_UID}
+
+  bundle:
+    image: busybox:latest
+    volumes:
+      - bundle:/usr/local/bundle
 
   redis:
-    image: redis:5.0-alpine
+    image: redis:5-alpine
     command: redis-server --port 6379
     networks:
       - backend
@@ -51,8 +49,6 @@ services:
 
   db:
     image: postgres:11-alpine
-    env_file:
-      - ./env/common.env
     volumes:
       - db:/var/lib/postgresql/data
     networks:
@@ -60,28 +56,35 @@ services:
     expose:
       - 5432
 
-  db_admin:
-    image: dpage/pgadmin4
-    env_file:
-      - ./env/common.env
-    networks:
-      - frontend
-      - backend
-    volumes:
-      - db_admin:/var/lib/pgadmin
-    expose:
-      - 80
-    depends_on:
-      - db
-
   selenium:
-    image: selenium/standalone-chrome
+    image: selenium/standalone-chrome:latest
     networks:
       - backend
     volumes:
       - /dev/shm:/dev/shm
     expose:
       - 4444
+
+  certs_generator:
+    build:
+      context: ./certs
+      args:
+        IMAGE: openjdk:8-jdk-alpine
+    volumes:
+      - /home/${USER}/certs:/certs
+
+  server:
+    build:
+      context: ./nginx
+      args:
+        IMAGE: nginx:1.15-alpine
+    networks:
+      - frontend
+      - backend
+    expose:
+      - 80
+    depends_on:
+      - app
 
   portainer:
     image: portainer/portainer:latest

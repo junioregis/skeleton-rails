@@ -1,10 +1,14 @@
 #!/bin/bash
 
+export CURRENT_UID="$(id -u):$(id -g)"
+
 PROJECT_NAME="skeleton_rails"
 
-SERVICES="app redis db db_admin selenium portainer"
+SERVICES="app bundle redis db db_admin selenium portainer"
 
-CMD="docker-compose --project-name=${PROJECT_NAME} -f docker-compose.yml -f docker-compose.dev.yml"
+CMD="docker-compose --project-name=${PROJECT_NAME} \
+                    --file docker-compose.yml \
+                    --file docker-compose.dev.yml"
 
 function init {
   # Copy Template
@@ -31,9 +35,6 @@ function init {
 
   # Stop Services
   ${CMD} down
-
-  # Check Permissions
-  permissions
 }
 
 function gen-secret {
@@ -41,7 +42,8 @@ function gen-secret {
 }
 
 function build {
-  ${CMD} build
+  ${CMD} build --pull ${SERVICES}
+  ${CMD} pull ${SERVICES}
 }
 
 function start {
@@ -53,11 +55,8 @@ function stop {
 }
 
 function restart {
-  ${CMD} restart ${SERVICES}
-}
-
-function logs {
-  ${CMD} logs -f app
+  stop
+  start
 }
 
 function terminal {
@@ -68,8 +67,8 @@ function credentials {
   ${CMD} exec -e EDITOR=nano app rails credentials:edit
 }
 
-function permissions {
-  sudo chown -R ${USER} .
+function logs {
+  ${CMD} logs -f
 }
 
 case "$1" in
@@ -91,20 +90,17 @@ case "$1" in
   restart)
     restart
     ;;
-  logs) 
-    logs
-    ;;
-  terminal) 
+  terminal)
     terminal
     ;;
-  permissions) 
-    permissions
-    ;;
-  credentials) 
+  credentials)
     credentials
     ;;
+  logs)
+    logs
+    ;;
   *)
-    echo "Usage: bash dev.sh init|gen-secret|build|start|stop|restart|logs|terminal|permissions|credentials"
+    echo "Usage: bash dev.sh init|gen-secret|build|start|stop|restart|terminal|credentials|logs"
     exit 1
   ;;
 esac
