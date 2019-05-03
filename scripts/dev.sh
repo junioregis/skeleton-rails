@@ -14,11 +14,8 @@ function init {
   # Copy Template
   cp -R template/* src/
 
-  # Build Services
-  ${CMD} build app
-
-  # Start Services
-  ${CMD} up -d app
+  # Build
+  build
 
   # Create Project Structure
   ${CMD} run --rm -e RAILS_MASTER_KEY app \
@@ -28,13 +25,14 @@ function init {
       --skip-git \
       --skip-bundle \
       --skip-gemfile \
+      --skip-active-storage \
       --database=postgresql
 
   # Initialize Database
-  ${CMD} run app rake db:setup
+  ${CMD} run --rm app rake db:setup
 
-  # Stop Services
-  ${CMD} down
+  # Stop
+  stop
 }
 
 function gen-secret {

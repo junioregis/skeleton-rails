@@ -21,7 +21,7 @@ services:
     volumes:
       - ./src:/app
       - storage:/app/storage
-      - bundle:/usr/local/bundle
+      - bundle:/bundle
     networks:
       - backend
     expose:
