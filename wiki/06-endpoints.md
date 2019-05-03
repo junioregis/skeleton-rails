@@ -19,12 +19,14 @@ docs/v1  | admin    | admin
 
 Set endpoints for Postman generator on file ```src/config/initializers/endpoints.rb```
 
-##### Admin:
+# 6.2. Admin
 
-Endpoint | Username | Password
----------|----------|---------
-admin    | admin    | admin
+[https://api.domain.com/admin](https://api.domain.com/admin)
 
-# 6.2. Portainer
+Username | Password
+---------|---------
+admin    | admin
+
+# 6.3. Portainer
 
 [https://portainer.domain.com](https://portainer.domain.com)
