@@ -23,9 +23,9 @@ Set endpoints for Postman generator on file ```src/config/initializers/endpoints
 
 [https://api.domain.com/admin](https://api.domain.com/admin)
 
-Username | Password
----------|---------
-admin    | admin
+Username         | Password
+-----------------|---------
+admin@domain.com | admin
 
 # 6.3. Portainer
 

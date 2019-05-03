@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  # Admin
-  ActiveAdmin.routes(self)
-
   # Devise
   devise_for :admin_users, ActiveAdmin::Devise.config
+
+  # Admin
+  ActiveAdmin.routes(self)
 
   # Docs
   unless Rails.env.production?
