@@ -9,7 +9,6 @@ class Profile < ApplicationRecord
   validates_presence_of :name, :gender, :birthday, :avatar
 
   def age
-    # TODO
-    0
+    ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
   end
 end
