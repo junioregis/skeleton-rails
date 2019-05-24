@@ -11,14 +11,17 @@ function install-cli {
 }
 
 function first-deploy {
+  # Start Services
+  bash scripts/dev.sh start
+
   APP_SECRET=$(bash scripts/dev.sh gen-secret)
-  APP_MASTER_KEY=$(cat src/config/master.key)
+  APP_MASTER_KEY=$(cat src/app/config/master.key)
 
   # Set App
-  heroku git:remote -a ${APP_NAME}
+  heroku git:remote --app ${APP_NAME}
   heroku access --app ${APP_NAME}
 
-  # Set Ruby project
+  # Set Ruby Project
   heroku buildpacks:add heroku/ruby
 
   # Install Postgres
@@ -31,7 +34,7 @@ function first-deploy {
   # Install Redis
   heroku addons:create heroku-redis:hobby-dev -a ${APP_NAME}
 
-  # Set environments variables
+  # Set Environments Variables
   heroku config:set RAILS_ENV=test \
                     RACK_ENV=test \
                     SECRET_KEY_BASE=${APP_SECRET} \
@@ -40,19 +43,23 @@ function first-deploy {
                     GOOGLE_CHROME_BIN=/app/.apt/opt/google/chrome/chrome \
                     GOOGLE_CHROME_SHIM=/app/.apt/opt/google/chrome/chrome
 
-  # Push project
+  # Push App
   git add .
   git commit -m "first commit"
   git push heroku `git subtree split --prefix src master`:refs/heads/master --force
 
-  # Create database
+  # Create Database
   heroku run rake db:migrate
   heroku run rake db:schema:load
   heroku run rake db:seed
 }
 
 function deploy {
-  # Push project
+  # Set App
+  heroku git:remote --app ${APP_NAME}
+  heroku access --app ${APP_NAME}
+
+  # Push App
   git add .
   git commit -a --allow-empty-message -m ''
   git push heroku `git subtree split --prefix src master`:refs/heads/master --force

@@ -1,1 +1,1 @@
-server 'junioregis.ddns.net', user: 'pi', password: 'raspberry', roles: %w{app}
+server 'domain.com', user: 'ubuntu', password: 'ubuntu', roles: %w{app}

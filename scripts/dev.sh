@@ -11,15 +11,18 @@ CMD="docker-compose --project-name=${PROJECT_NAME} \
                     --file docker-compose.dev.yml"
 
 function init {
+  # Create folders
+  mkdir -p src/app
+
   # Copy Template
   cp -R template/* src/
 
   # Build
   build
 
-  # Create Project Structure
+  # Create App Structure
   ${CMD} run --rm -e RAILS_MASTER_KEY app \
-    rails new . \
+    bundle exec rails new . \
       --api \
       --skip \
       --skip-git \
@@ -28,8 +31,11 @@ function init {
       --skip-active-storage \
       --database=postgresql
 
+  # Check Permissions
+  chown -hR ${CURRENT_UID} .
+
   # Initialize Database
-  ${CMD} run --rm app rake db:setup
+  ${CMD} run --rm app bundle exec rake db:setup
 
   # Stop
   stop

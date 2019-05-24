@@ -6,6 +6,11 @@ services:
       args:
         IMAGE: arm32v7/ruby:2.6.3-alpine
 
+  admin:
+    build:
+      args:
+        IMAGE: arm32v7/ruby:2.6.3-alpine
+
   bundle:
     image: arm32v7/busybox:latest
 

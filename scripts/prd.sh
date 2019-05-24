@@ -2,18 +2,18 @@
 
 export CURRENT_UID="$(id -u):$(id -g)"
 
-PROJECT_NAME="api"
+PROJECT_NAME="skeleton_rails"
 
-SERVICES="app bundle redis db selenium server portainer proxy letsencrypt"
+SERVICES="app bundle redis db selenium portainer proxy letsencrypt"
 
-ARCH=""
-#ARCH="--file docker-compose.prd.arm32v7.yml"
+#ARCH=""
+ARCH="--file docker-compose.prd.arm32v7.yml"
 
 CMD="docker-compose --project-name=${PROJECT_NAME} \
                     --file docker-compose.yml \
                     --file docker-compose.prd.yml ${ARCH}"
 
-CAPISTRANO_CMD="docker-compose --project-name=skeleton_rails \
+CAPISTRANO_CMD="docker-compose --project-name=${PROJECT_NAME} \
                                --file docker-compose.yml \
                                --file docker-compose.dev.yml \
                                run --rm app cap production"

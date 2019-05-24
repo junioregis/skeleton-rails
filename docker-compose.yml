@@ -21,7 +21,7 @@ services:
     volumes:
       - ./src:/app
       - storage:/app/storage
-      - bundle:/bundle
+      - bundle:/usr/local/bundle
     networks:
       - backend
     expose:
@@ -30,7 +30,6 @@ services:
       - bundle
       - db
       - selenium
-    user: ${CURRENT_UID}
 
   bundle:
     image: busybox:latest
@@ -72,19 +71,6 @@ services:
         IMAGE: openjdk:8-jdk-alpine
     volumes:
       - /home/${USER}/certs:/certs
-
-  server:
-    build:
-      context: ./nginx
-      args:
-        IMAGE: nginx:1.15-alpine
-    networks:
-      - frontend
-      - backend
-    expose:
-      - 80
-    depends_on:
-      - app
 
   portainer:
     image: portainer/portainer:latest

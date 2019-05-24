@@ -53,7 +53,7 @@ Command      | Info
 -------------|------------------
 build        | Build services
 setup        | Setup app
-migrate      | Migrate databasse
+migrate      | Migrate database
 start        | Start services
 stop         | Stop services
 restart      | Restart services

@@ -1,6 +1,8 @@
 class ApiController < ActionController::API
   before_action :doorkeeper_authorize!
 
+  skip_before_action :doorkeeper_authorize!, only: [:routing_error]
+
   rescue_from StandardError, with: :internal_error
 
   def internal_error(e)

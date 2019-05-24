@@ -44,12 +44,6 @@ end
 gem 'rack-cors'
 gem 'rack-attack'
 
-# Admin
-gem 'activeadmin'
-
-# Devise
-gem 'devise'
-
 # OAuth 2.0
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
@@ -62,3 +56,9 @@ gem 'httparty'
 gem 'phantomjs'
 gem 'selenium-webdriver'
 gem 'mechanize'
+
+# Admin
+gem 'activeadmin'
+
+# Devise
+gem 'devise'
