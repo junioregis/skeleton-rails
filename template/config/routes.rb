@@ -3,10 +3,8 @@ Rails.application.routes.draw do
   root to: 'application#not_found'
 
   # Admin
-  scope :admin do
-    devise_for :admin_users, ActiveAdmin::Devise.config
-    ActiveAdmin.routes(self)
-  end
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   # Docs
   unless Rails.env.production?

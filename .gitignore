@@ -8,13 +8,4 @@
 /nginx/log
 
 # App
-src/log
-src/tmp
-src/public/system
-src/config/master.key
-src/.bundle
-src/vendor/bundle
-src/public/packs
-src/public/packs-test
-src/public/assets
-src/storage/*
+src/
