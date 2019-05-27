@@ -1,6 +1,7 @@
 #!/bin/bash
 
 APP_NAME="skeleton-rails"
+BRANCH="master"
 
 function install-cli {
   # Install CLI
@@ -46,7 +47,7 @@ function first-deploy {
   # Push App
   git add .
   git commit -m "first commit"
-  git push heroku `git subtree split --prefix src master`:refs/heads/master --force
+  git push heroku `git subtree split --prefix src ${BRANCH}`:refs/heads/master --force
 
   # Create Database
   heroku run rake db:migrate
@@ -62,7 +63,7 @@ function deploy {
   # Push App
   git add .
   git commit -a --allow-empty-message -m ''
-  git push heroku `git subtree split --prefix src master`:refs/heads/master --force
+  git push heroku `git subtree split --prefix src ${BRANCH}`:refs/heads/master --force
 }
 
 function logs {

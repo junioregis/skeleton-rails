@@ -5,8 +5,8 @@ ActiveRecord::Schema.define(version: 1) do
 
   # Admin: Users
   create_table :admin_users, id: :uuid, force: :cascade do |t|
-    t.string :email, default: '', null: false, index: true
-    t.string :encrypted_password, default: '', null: false
+    t.string :email, null: false, index: true, unique: true
+    t.string :encrypted_password, null: false
     t.string :reset_password_token, index: true, unique: true
     t.datetime :reset_password_sent_at
     t.datetime :remember_created_at

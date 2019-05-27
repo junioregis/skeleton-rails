@@ -58,7 +58,6 @@ gem 'selenium-webdriver'
 gem 'mechanize'
 
 # Admin
+gem 'sass-rails'
 gem 'activeadmin'
-
-# Devise
 gem 'devise'
