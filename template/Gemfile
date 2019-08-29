@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.6.3'
 
 # Rails
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 6.0.0'
 
 # Database
 gem 'pg', '>= 0.18', '< 2.0'
@@ -18,10 +18,10 @@ gem 'redis', '~> 4.0'
 gem 'mini_magick', '~> 4.8'
 
 # Boot Faster
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.4.2', require: false
 
 # JSON Generator
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.7'
 
 group :development do
   # Deploy
